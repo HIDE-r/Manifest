@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<manifest>
+  
+	<!-- 标签 remote 用于定义远端仓库 -->
+	<remote name="github_https"
+	        fetch="https://github.com" />
+	<remote name="github_ssh"
+	        fetch="ssh://git@github.com" />
+
+	<!-- 标签 default 用于提供默认值, 只能存在一个 -->
+	<default remote="github_ssh"
+		      revision="main"
+		      sync-s="true" />
+
+	<!-- 标签 project 用于定义一个工作区仓库 -->
+	<project path="DotFiles" name="HIDE-r/DotFiles" />
+	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
+	<project path="Cheatsheet-navi" name="HIDE-r/Cheatsheet-navi" />
+	<project path="CodeDemo-C" name="HIDE-r/CodeDemo-C" />
+  
+</manifest>
