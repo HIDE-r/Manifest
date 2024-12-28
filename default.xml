@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 格式参考: https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md -->
+
 <manifest>
   
 	<!-- 标签 remote 用于定义远端仓库 -->
