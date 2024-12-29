@@ -4,7 +4,7 @@
       relink: true
 
 - link:
-    ~/.local/share/navi/cheats/HideOnLie__Cheatsheet-navi:
+    ~/.local/share/navi/cheats/HIDE-r__Cheatsheet-navi:
       path: ./Cheatsheet-navi
     ~/.zshrc:
       path: ./DotFiles/zsh/zshrc
