@@ -12,10 +12,15 @@
 
 	<!-- 标签 default 用于提供默认值, 只能存在一个 -->
 	<default remote="github_ssh"
-		      revision="main"
-		      sync-s="true" />
+		revision="main"
+		sync-s="true"
+		sync-j="4" />
 
 	<!-- 标签 project 用于定义一个工作区仓库 -->
+	<project path=".dotbot" name="anishathalye/dotbot" revision="master"/>
+
+	<project path="Manifest" name="HIDE-r/Manifest" />
+	<linkfile src="install.conf.yaml" dest="Manifest/install.conf.yaml" />
 	<project path="DotFiles" name="HIDE-r/DotFiles" />
 	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
 	<project path="Cheatsheet-navi" name="HIDE-r/Cheatsheet-navi" />

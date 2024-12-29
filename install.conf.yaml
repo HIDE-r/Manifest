@@ -1,0 +1,80 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- link:
+    ~/.zshrc:
+      path: zsh/zshrc
+    ~/.zinit:
+      path: .zinit
+    ~/.config/starship.toml:
+      path: ./starship/starship.toml
+    ~/.tmux.conf:
+      path: tmux/tmux.conf
+    ~/.tmux.plugin_local.conf:
+      path: ./tmux/tmux.plugin_local.conf
+    ~/.tmux.plugin_remote.conf:
+      path: ./tmux/tmux.plugin_remote.conf
+    ~/.tpm:
+      path: .tpm
+    ~/.xprofile:
+      path: xorg/xprofile
+    ~/.Xresources:
+      path: xorg/Xresources
+    ~/.config/nvim:
+      path: nvim
+    ~/.config/awesome:
+      path: awesome
+    ~/.config/dunst/dunstrc:
+      path: dunst/dunstrc
+    ~/.config/polybar/config:
+      path: polybar/config
+    ~/.config/rofi/config.rasi:
+      path: rofi/config.rasi
+    ~/.gitconfig.local:
+      path: git/gitconfig.local
+    ~/.config/gitui:
+      path: gitui
+    ~/.config/wezterm/wezterm.lua:
+      path: wezterm/wezterm.lua
+    ~/.config/lf:
+      path: lf
+    ~/.local/share/navi/cheats/HideOnLie__Cheatsheet-navi:
+      path: navi
+    ~/.ssh/config:
+      path: ssh/config
+    ~/.local/share/fcitx5/rime/clover.dict.yaml:
+      path: rime/clover.dict.yaml
+    ~/.local/share/fcitx5/rime/clover.key_bindings.yaml:
+      path: rime/clover.key_bindings.yaml
+    ~/.local/share/fcitx5/rime/default.custom.yaml:
+      path: rime/default.custom.yaml
+    ~/.local/share/fcitx5/rime/clover.custom.yaml:
+      path: rime/clover.custom.yaml
+    ~/.czrc:
+      path: ./commitizen/czrc
+    ~/.config/clash/config.yaml:
+      path: ./clash/config.yaml
+    ~/.config/hypr:
+      path: ./hyprland
+    ~/.config/waybar:
+      path: ./waybar
+    ~/.config/mako:
+      path: ./mako
+    ~/.config/microsoft-edge-stable-flags.conf:
+      path: ./microsoft-edge/microsoft-edge-stable-flags.conf
+
+- clean:
+    ~/:
+      force: true
+    ~/.config:
+      force: true
+
+- create:
+    ~/.ssh:
+      mode: 0700
+
+# This section contains any raw shell commands that you’d like to run upon running this install script
+#- shell:
+#  - [git submodule update --init --recursive, Installing submodules]
