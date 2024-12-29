@@ -1,4 +1,4 @@
-include rules.mk
+include ./ScriptTools/Utils/Makefiles/rules.mk
 
 default: help
 

@@ -4,66 +4,66 @@
       relink: true
 
 - link:
-    ~/.zshrc:
-      path: zsh/zshrc
-    ~/.zinit:
-      path: .zinit
-    ~/.config/starship.toml:
-      path: ./starship/starship.toml
-    ~/.tmux.conf:
-      path: tmux/tmux.conf
-    ~/.tmux.plugin_local.conf:
-      path: ./tmux/tmux.plugin_local.conf
-    ~/.tmux.plugin_remote.conf:
-      path: ./tmux/tmux.plugin_remote.conf
-    ~/.tpm:
-      path: .tpm
-    ~/.xprofile:
-      path: xorg/xprofile
-    ~/.Xresources:
-      path: xorg/Xresources
-    ~/.config/nvim:
-      path: nvim
-    ~/.config/awesome:
-      path: awesome
-    ~/.config/dunst/dunstrc:
-      path: dunst/dunstrc
-    ~/.config/polybar/config:
-      path: polybar/config
-    ~/.config/rofi/config.rasi:
-      path: rofi/config.rasi
-    ~/.gitconfig.local:
-      path: git/gitconfig.local
-    ~/.config/gitui:
-      path: gitui
-    ~/.config/wezterm/wezterm.lua:
-      path: wezterm/wezterm.lua
-    ~/.config/lf:
-      path: lf
     ~/.local/share/navi/cheats/HideOnLie__Cheatsheet-navi:
-      path: navi
+      path: ./Cheatsheet-navi
+    ~/.zshrc:
+      path: ./DotFiles/zsh/zshrc
+    ~/.zinit:
+      path: ./DotFiles/.zinit
+    ~/.config/starship.toml:
+      path: ./DotFiles/starship/starship.toml
+    ~/.tmux.conf:
+      path: ./DotFiles/tmux/tmux.conf
+    ~/.tmux.plugin_local.conf:
+      path: ./DotFiles/tmux/tmux.plugin_local.conf
+    ~/.tmux.plugin_remote.conf:
+      path: ./DotFiles/tmux/tmux.plugin_remote.conf
+    ~/.tpm:
+      path: ./DotFiles/.tpm
+    ~/.xprofile:
+      path: ./DotFiles/xorg/xprofile
+    ~/.Xresources:
+      path: ./DotFiles/xorg/Xresources
+    ~/.config/nvim:
+      path: ./DotFiles/nvim
+    ~/.config/awesome:
+      path: ./DotFiles/awesome
+    ~/.config/dunst/dunstrc:
+      path: ./DotFiles/dunst/dunstrc
+    ~/.config/polybar/config:
+      path: ./DotFiles/polybar/config
+    ~/.config/rofi/config.rasi:
+      path: ./DotFiles/rofi/config.rasi
+    ~/.gitconfig.local:
+      path: ./DotFiles/git/gitconfig.local
+    ~/.config/gitui:
+      path: ./DotFiles/gitui
+    ~/.config/wezterm/wezterm.lua:
+      path: ./DotFiles/wezterm/wezterm.lua
+    ~/.config/lf:
+      path: ./DotFiles/lf
     ~/.ssh/config:
-      path: ssh/config
+      path: ./DotFiles/ssh/config
     ~/.local/share/fcitx5/rime/clover.dict.yaml:
-      path: rime/clover.dict.yaml
+      path: ./DotFiles/rime/clover.dict.yaml
     ~/.local/share/fcitx5/rime/clover.key_bindings.yaml:
-      path: rime/clover.key_bindings.yaml
+      path: ./DotFiles/rime/clover.key_bindings.yaml
     ~/.local/share/fcitx5/rime/default.custom.yaml:
-      path: rime/default.custom.yaml
+      path: ./DotFiles/rime/default.custom.yaml
     ~/.local/share/fcitx5/rime/clover.custom.yaml:
-      path: rime/clover.custom.yaml
+      path: ./DotFiles/rime/clover.custom.yaml
     ~/.czrc:
-      path: ./commitizen/czrc
+      path: ./DotFiles/commitizen/czrc
     ~/.config/clash/config.yaml:
-      path: ./clash/config.yaml
+      path: ./DotFiles/clash/config.yaml
     ~/.config/hypr:
-      path: ./hyprland
+      path: ./DotFiles/hyprland
     ~/.config/waybar:
-      path: ./waybar
+      path: ./DotFiles/waybar
     ~/.config/mako:
-      path: ./mako
+      path: ./DotFiles/mako
     ~/.config/microsoft-edge-stable-flags.conf:
-      path: ./microsoft-edge/microsoft-edge-stable-flags.conf
+      path: ./DotFiles/microsoft-edge/microsoft-edge-stable-flags.conf
 
 - clean:
     ~/:
