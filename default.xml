@@ -21,6 +21,7 @@
 
 	<project path="Manifest" name="HIDE-r/Manifest" >
 		<linkfile dest="install.conf.yaml" src="install.conf.yaml"  />
+		<linkfile dest="Makefile" src="Makefile"  />
 	</project>
 
 	<project path="DotFiles" name="HIDE-r/DotFiles" />
