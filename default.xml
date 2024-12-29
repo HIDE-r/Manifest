@@ -19,8 +19,10 @@
 	<!-- 标签 project 用于定义一个工作区仓库 -->
 	<project path=".dotbot" name="anishathalye/dotbot" revision="master"/>
 
-	<project path="Manifest" name="HIDE-r/Manifest" />
-	<linkfile src="install.conf.yaml" dest="Manifest/install.conf.yaml" />
+	<project path="Manifest" name="HIDE-r/Manifest" >
+		<linkfile dest="install.conf.yaml" src="install.conf.yaml"  />
+	</project>
+
 	<project path="DotFiles" name="HIDE-r/DotFiles" />
 	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
 	<project path="Cheatsheet-navi" name="HIDE-r/Cheatsheet-navi" />
