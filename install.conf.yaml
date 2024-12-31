@@ -6,6 +6,8 @@
 - link:
     ~/.local/share/navi/cheats/HIDE-r__Cheatsheet-navi:
       path: ./Cheatsheet-navi
+    ~/.local/bin/docker_build.sh:
+      path: ./ScriptTools/Docker/docker_build.sh
     ~/.zshrc:
       path: ./DotFiles/zsh/zshrc
     ~/.zinit:
