@@ -2,7 +2,7 @@ include ./ScriptTools/Utils/Makefiles/rules.mk
 
 default: help
 
-DAILY_UPDATE_ACTION+=git_update_submodule_from_remote
+DAILY_UPDATE_ACTION+=repo_sync
 DAILY_UPDATE_ACTION+=zinit_update
 DAILY_UPDATE_ACTION+=tldr_update
 ifeq ($(IS_WSL), false)
@@ -52,6 +52,11 @@ git_update_submodule:git_sync_submodule
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
 	git submodule update --recursive
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
+
+repo_sync:
+	@ $(ECHO) '\n$(_Y)===== [Repo update] Start =====$(_N)\n'
+	repo sync
+	@ $(ECHO) '\n$(_Y)===== [Repo update] End =====$(_N)\n'
 
 ###
 ### git-crypt
