@@ -27,6 +27,6 @@
 	<project path="DotFiles" name="HIDE-r/DotFiles" />
 	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
 	<project path="Cheatsheet-navi" name="HIDE-r/Cheatsheet-navi" />
-	<project path="CodeDemo-C" name="HIDE-r/CodeDemo-C" />
+	<project path="CodeDemo" name="HIDE-r/CodeDemo" />
   
 </manifest>
