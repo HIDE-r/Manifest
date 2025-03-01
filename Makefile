@@ -45,7 +45,7 @@ git_init_submodule:git_sync_submodule
 #: Update all submodule from remote
 git_update_submodule_from_remote:git_sync_submodule
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
-	cd ./DotFiles && git submodule update --remote --recursive
+	cd ./DotFiles && git submodule update --remote
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
 
 #: Update all submodule
