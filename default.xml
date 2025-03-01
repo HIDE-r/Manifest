@@ -5,13 +5,13 @@
 <manifest>
   
 	<!-- 标签 remote 用于定义远端仓库 -->
-	<remote name="github_https"
-	        fetch="https://github.com" />
-	<remote name="github_ssh"
+	<!-- <remote name="github_https" -->
+	<!--         fetch="https://github.com" /> -->
+	<remote name="origin"
 	        fetch="ssh://git@github.com" />
 
 	<!-- 标签 default 用于提供默认值, 只能存在一个 -->
-	<default remote="github_ssh"
+	<default remote="origin"
 		revision="main"
 		sync-s="true"
 		sync-j="4" />
