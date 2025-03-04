@@ -3,7 +3,6 @@ include ./ScriptTools/Utils/Makefiles/rules.mk
 default: help
 
 DAILY_UPDATE_ACTION+=repo_sync
-DAILY_UPDATE_ACTION+=git_update_submodule_from_remote
 DAILY_UPDATE_ACTION+=zinit_update
 DAILY_UPDATE_ACTION+=tldr_update
 ifeq ($(IS_WSL), false)
@@ -45,7 +44,7 @@ git_init_submodule:git_sync_submodule
 #: Update all submodule from remote
 git_update_submodule_from_remote:git_sync_submodule
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
-	cd ./DotFiles && git submodule update --remote
+	git submodule update --remote
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
 
 #: Update all submodule
