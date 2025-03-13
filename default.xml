@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 格式参考: https://gerrit.googlesource.com/git-repo/+/master/docs/manifest-format.md -->
+<!-- 格式参考: https://gerrit.googlesource.com/git-repo/+/HEAD/docs/manifest-format.md -->
 
 <manifest>
   
 	<!-- 标签 remote 用于定义远端仓库 -->
-	<!-- <remote name="github_https" -->
-	<!--         fetch="https://github.com" /> -->
 	<remote name="origin"
-	        fetch="ssh://git@github.com" />
+	        fetch="https://github.com" />
+	<!-- <remote name="origin" -->
+	<!--         fetch="ssh://git@github.com" /> -->
 
 	<!-- 标签 default 用于提供默认值, 只能存在一个 -->
 	<default remote="origin"
@@ -17,12 +17,12 @@
 		sync-j="4" />
 
 	<!-- 标签 project 用于定义一个工作区仓库 -->
-	<project path=".dotbot" name="anishathalye/dotbot" revision="master"/>
-
 	<project path="Manifest" name="HIDE-r/Manifest" >
 		<linkfile dest="install.conf.yaml" src="dotbot/install.conf.yaml"  />
 		<linkfile dest="Makefile" src="Makefile"  />
 	</project>
+
+	<project path=".dotbot" name="anishathalye/dotbot" revision="master"/>
 
 	<project path="DotFiles" name="HIDE-r/DotFiles" />
 	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
