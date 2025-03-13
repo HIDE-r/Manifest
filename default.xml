@@ -20,7 +20,7 @@
 	<project path=".dotbot" name="anishathalye/dotbot" revision="master"/>
 
 	<project path="Manifest" name="HIDE-r/Manifest" >
-		<linkfile dest="install.conf.yaml" src="install.conf.yaml"  />
+		<linkfile dest="install.conf.yaml" src="dotbot/install.conf.yaml"  />
 		<linkfile dest="Makefile" src="Makefile"  />
 	</project>
 
