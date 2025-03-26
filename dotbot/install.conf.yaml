@@ -8,6 +8,10 @@
       path: ./Cheatsheet-navi
     ~/.local/bin/docker_build.sh:
       path: ./ScriptTools/Docker/docker_build.sh
+    ~/.local/bin/sync_fcitx5.sh:
+      path: ./ScriptTools/Rime/sync_fcitx5.sh
+    ~/.local/bin/server_notify:
+      path: ./ScriptTools/ServerNotify/server_notify
     ~/.zshrc:
       path: ./DotFiles/zsh/zshrc
     ~/.zinit:
