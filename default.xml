@@ -28,5 +28,6 @@
 	<project path="ScriptTools" name="HIDE-r/ScriptTools" />
 	<project path="Cheatsheet-navi" name="HIDE-r/Cheatsheet-navi" />
 	<project path="CodeDemo" name="HIDE-r/CodeDemo" />
+	<project path="DockerEnv" name="HIDE-r/DockerEnv" />
   
 </manifest>
