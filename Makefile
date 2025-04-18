@@ -55,7 +55,7 @@ git_update_submodule:git_sync_submodule
 
 repo_sync:
 	@ $(ECHO) '\n$(_Y)===== [Repo update] Start =====$(_N)\n'
-	repo sync
+	./.repo/repo/repo sync
 	@ $(ECHO) '\n$(_Y)===== [Repo update] End =====$(_N)\n'
 
 ###
