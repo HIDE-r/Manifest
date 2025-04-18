@@ -19,6 +19,7 @@
 	<!-- 标签 project 用于定义一个工作区仓库 -->
 	<project path="Manifest" name="HIDE-r/Manifest" >
 		<linkfile dest="install.conf.yaml" src="dotbot/install.conf.yaml"  />
+		<linkfile dest=".envrc" src="envrc"  />
 		<linkfile dest="Makefile" src="Makefile"  />
 	</project>
 
