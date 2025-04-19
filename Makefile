@@ -135,7 +135,7 @@ tmux_plugin_update:
 
 rime_sync:
 	@ $(ECHO) '\n$(_Y)===== [$@] Start =====$(_N)\n'
-	~/ScriptTools/Rime/sync_fcitx5.sh
+	./ScriptTools/Rime/sync_fcitx5.sh
 	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
 
 #: update plocate database
