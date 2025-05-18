@@ -70,6 +70,8 @@
       path: ./DotFiles/mako
     ~/.config/microsoft-edge-stable-flags.conf:
       path: ./DotFiles/microsoft-edge/microsoft-edge-stable-flags.conf
+    ~/.config/wlogout:
+      path: ./DotFiles/wlogout
 
 - clean:
     ~/:
