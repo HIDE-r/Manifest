@@ -72,6 +72,8 @@
       path: ./DotFiles/microsoft-edge/microsoft-edge-stable-flags.conf
     ~/.config/wlogout:
       path: ./DotFiles/wlogout
+    ~/.config/flameshot:
+      path: ./DotFiles/flameshot
 
 - clean:
     ~/:
