@@ -6,8 +6,8 @@
 - link:
     ~/.local/share/navi/cheats/HIDE-r__Cheatsheet-navi:
       path: ./Cheatsheet-navi
-    ~/.local/bin/docker_run.sh:
-      path: ./ScriptTools/Docker/docker_run.sh
+    ~/.local/bin/docker_run:
+      path: ./ScriptTools/Docker/docker_run
     ~/.local/bin/sync_fcitx5.sh:
       path: ./ScriptTools/Rime/sync_fcitx5.sh
     ~/.local/bin/server_notify:
