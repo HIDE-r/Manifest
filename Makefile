@@ -144,7 +144,7 @@ plocate_update: check_passwd
 #: sync repo from remote
 repo_sync:
 	$(REPO) sync
-	git submodule update --init --recursive
+	$(REPO) forall -c 'git submodule update --init --recursive'
 
 #: checkout repo status
 repo_status:
