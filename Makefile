@@ -149,6 +149,6 @@ repo_status:
 	$(REPO) status
 
 repo_push:
-	$(REPO) forall -c 'git push origin HEAD:main'
+	$(REPO) forall -i '.dotbot' -c 'git push origin HEAD:main'
 
 .PHONY: daily_update
