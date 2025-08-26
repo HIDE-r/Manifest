@@ -13,7 +13,6 @@
 	<!-- 标签 default 用于提供默认值, 只能存在一个 -->
 	<default remote="origin"
 		revision="main"
-		sync-s="true"
 		sync-j="4" />
 
 	<!-- 标签 project 用于定义一个工作区仓库 -->
