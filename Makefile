@@ -1,5 +1,7 @@
 include ./ScriptTools/Utils/Makefiles/rules.mk
 
+REPO ?= .repo/repo/repo
+
 default: help
 
 DAILY_UPDATE_ACTION+=repo_sync
@@ -52,11 +54,6 @@ git_update_submodule:git_sync_submodule
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
 	git submodule update --recursive
 	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
-
-repo_sync:
-	@ $(ECHO) '\n$(_Y)===== [Repo update] Start =====$(_N)\n'
-	./.repo/repo/repo sync
-	@ $(ECHO) '\n$(_Y)===== [Repo update] End =====$(_N)\n'
 
 ###
 ### git-crypt
@@ -145,13 +142,13 @@ plocate_update: check_passwd
 	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
 
 repo_sync:
-	repo sync
+	$(REPO) sync
 	git submodule update --init --recursive
 
 repo_status:
-	repo status
+	$(REPO) status
 
 repo_push:
-	repo forall -c 'git push origin HEAD:main'
+	$(REPO) forall -c 'git push origin HEAD:main'
 
 .PHONY: daily_update
