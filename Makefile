@@ -141,10 +141,16 @@ plocate_update: check_passwd
 	@ expect -c 'spawn sudo updatedb; expect "*password*"; send "$(ROOT_PASSWD)\r"; interact'
 	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
 
+
+#: sync repo to init state
+repo_init:
+	$(REPO) sync
+	$(REPO) forall -c 'git submodule update --init --recursive'
+
 #: sync repo from remote
 repo_sync:
 	$(REPO) sync
-	$(REPO) forall -c 'git submodule update --init --recursive'
+	$(REPO) forall -c 'git submodule update --remote'
 
 #: checkout repo status
 repo_status:
