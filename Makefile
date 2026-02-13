@@ -1,6 +1,5 @@
-include ./ScriptTools/Utils/Makefiles/rules.mk
-
 REPO ?= .repo/repo/repo
+ECHO ?= echo -e
 
 default: help
 
@@ -39,21 +38,21 @@ git_sync_submodule:
 
 #: Init all submodule from parent repo
 git_init_submodule:git_sync_submodule
-	@ $(ECHO) '\n$(_Y)===== [Submodule init] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule init] Start =====\n'
 	git submodule update --init --recursive
-	@ $(ECHO) '\n$(_Y)===== [Submodule init] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule init] End =====\n'
 
 #: Update all submodule from remote
 git_update_submodule_from_remote:git_sync_submodule
-	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule update] Start =====\n'
 	git submodule update --remote
-	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule update] End =====\n'
 
 #: Update all submodule
 git_update_submodule:git_sync_submodule
-	@ $(ECHO) '\n$(_Y)===== [Submodule update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule update] Start =====\n'
 	git submodule update --recursive
-	@ $(ECHO) '\n$(_Y)===== [Submodule update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Submodule update] End =====\n'
 
 ###
 ### git-crypt
@@ -89,57 +88,57 @@ check_passwd: root_passwd
 ### ArchLinux Package Manager
 ###
 pkgfile_update: check_passwd
-	@ $(ECHO) '\n$(_Y)===== [Pkgfile update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Pkgfile update] Start =====\n'
 	@ expect -c 'spawn sudo pkgfile -u; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n$(_Y)===== [Pkgfile update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Pkgfile update] End =====\n'
 
 pacman_update: check_passwd 
-	@ $(ECHO) '\n$(_Y)===== [Pacman system update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Pacman system update] Start =====\n'
 	@ expect -c 'spawn sudo pacman -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n$(_Y)===== [Pacman system update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Pacman system update] End =====\n'
 
 paru_update: check_passwd
-	@ $(ECHO) '\n$(_Y)===== [paru system update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [paru system update] Start =====\n'
 	@ expect -c 'spawn paru -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n$(_Y)===== [paru system update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [paru system update] End =====\n'
 
 pacdiff_notify:
-	@ $(ECHO) '\n$(_Y)===== [pacdiff] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [pacdiff] Start =====\n'
 	@ pacdiff -p -o
-	@ $(ECHO) '\n$(_Y)===== [pacdiff] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [pacdiff] End =====\n'
 
 ###
 ### miscellaneous
 ###
 
 zinit_update:
-	@ $(ECHO) '\n$(_Y)===== [Zinit update] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [Zinit update] Start =====\n'
 	zsh -ic 'zinit update'
-	@ $(ECHO) '\n$(_Y)===== [Zinit update] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [Zinit update] End =====\n'
 
 tldr_update:
 	tldr -u
 
 neovim_plugin_update:
-	@ $(ECHO) '\n$(_Y)===== [$@] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] Start =====\n'
 	nvim -i NONE -V1 --headless -c 'lua require("lazy").sync({wait=true,show=false})' +qa
-	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] End =====\n'
 
 tmux_plugin_update:
-	@ $(ECHO) '\n$(_Y)===== [$@] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] Start =====\n'
 	$(TPM_PATH)/bin/update_plugins all
-	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] End =====\n'
 
 rime_sync:
-	@ $(ECHO) '\n$(_Y)===== [$@] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] Start =====\n'
 	./ScriptTools/Rime/sync_fcitx5.sh
-	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] End =====\n'
 
 #: update plocate database
 plocate_update: check_passwd
-	@ $(ECHO) '\n$(_Y)===== [$@] Start =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] Start =====\n'
 	@ expect -c 'spawn sudo updatedb; expect "*password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n$(_Y)===== [$@] End =====$(_N)\n'
+	@ $(ECHO) '\n===== [$@] End =====\n'
 
 
 #: sync repo to init state
@@ -159,5 +158,8 @@ repo_status:
 #: push all commit to remote
 repo_push:
 	$(REPO) forall -i '.dotbot' -c 'git push origin HEAD:main'
+
+help:
+	remake --tasks
 
 .PHONY: daily_update
