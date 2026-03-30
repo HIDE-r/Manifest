@@ -122,6 +122,7 @@ tldr_update:
 neovim_plugin_update:
 	@ $(ECHO) '\n===== [$@] Start =====\n'
 	nvim -i NONE -V1 --headless -c 'lua require("lazy").sync({wait=true,show=false})' +qa
+	nvim -i NONE -V1 --headless -c 'MasonUpdate' +qa
 	@ $(ECHO) '\n===== [$@] End =====\n'
 
 tmux_plugin_update:
