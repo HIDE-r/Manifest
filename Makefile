@@ -159,7 +159,7 @@ repo_status:
 
 #: push all commit to remote
 repo_push:
-	$(REPO) forall -i '.dotbot' -c 'git status -sb && git push origin HEAD:main'
+	$(REPO) forall -i '.dotbot' -c 'status=$$(git status -sb); echo "===== $$REPO_PATH ====="; echo "$$status"; echo "$$status" | grep -q "ahead" && git push origin HEAD:main || true'
 
 help:
 	remake --tasks
