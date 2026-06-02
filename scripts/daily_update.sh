@@ -166,25 +166,23 @@ run_task() {
     esac
 }
 
-printf "Daily update\n\n"
-
 for task in "$@"; do
     run_task "${task}"
 done
 
 printf "\nSummary: %d ok" "${ok_count}"
-if [ "${warn_count}" -gt 0 ]; then
+if ((warn_count > 0)); then
     printf ", %d warning" "${warn_count}"
 fi
-if [ "${skip_count}" -gt 0 ]; then
+if ((skip_count > 0)); then
     printf ", %d skipped" "${skip_count}"
 fi
-if [ "${fail_count}" -gt 0 ]; then
+if ((fail_count > 0)); then
     printf ", %d failed" "${fail_count}"
 fi
 printf "\nLogs: %s\n" "${log_dir}"
 
-if [ "${fail_count}" -gt 0 ]; then
+if ((fail_count > 0)); then
     exit 1
 fi
 exit 0
