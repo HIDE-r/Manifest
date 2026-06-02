@@ -14,7 +14,6 @@ DAILY_UPDATE_ACTION+=paru_update
 DAILY_UPDATE_ACTION+=pkgfile_update
 DAILY_UPDATE_ACTION+=tmux_plugin_update
 DAILY_UPDATE_ACTION+=plocate_update
-DAILY_UPDATE_ACTION+=pacdiff_notify
 DAILY_UPDATE_ACTION+=neovim_plugin_update
 
 DOTBOT_DIR=.dotbot
@@ -28,7 +27,8 @@ dotbot:
 	@$(CURDIR)/$(DOTBOT_DIR)/$(DOTBOT_BIN) -d $(CURDIR) -c $(DOTBOT_CONFIG)
 
 #: Daily update
-daily_update: check_passwd $(DAILY_UPDATE_ACTION)
+daily_update: check_passwd
+	@./Manifest/scripts/daily_update.sh $(DAILY_UPDATE_ACTION)
 
 ###
 ### git submodule
@@ -67,6 +67,9 @@ root_passwd:
 	$(eval export BW_SESSION:=$(shell bw unlock | sed -n '/BW_SESSION=/{p;q}' | cut -d '"' -f2))
 	@ echo $$(bw get password "ArchLinux-R9000K-root") | md5sum > root_passwd
 
+ifeq ($(DAILY_UPDATE_CHILD),1)
+check_passwd:
+else
 check_passwd: root_passwd
 	$(eval export INPUT_PASSWD:=$(shell read -s -p "Enter the root password:" input_passwd && echo $${input_passwd} ))
 	@ echo
@@ -77,6 +80,7 @@ check_passwd: root_passwd
 		exit 1; \
 	fi
 	$(eval export ROOT_PASSWD:=$(INPUT_PASSWD))
+endif
 
 ###
 ### ArchLinux Package Manager
@@ -91,7 +95,11 @@ paru_update: check_passwd
 	@ expect -c 'spawn paru -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
 
 pacdiff_notify:
-	@ pacdiff -p -o
+	@ output=$$(pacdiff -p -o); \
+	if [ -n "$$output" ]; then \
+		printf '%s\n' "$$output"; \
+		printf '__DAILY_UPDATE_STATUS=warn:pacdiff has files that need review\n'; \
+	fi
 
 ###
 ### miscellaneous
