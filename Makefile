@@ -38,21 +38,15 @@ git_sync_submodule:
 
 #: Init all submodule from parent repo
 git_init_submodule:git_sync_submodule
-	@ $(ECHO) '\n===== [Submodule init] Start =====\n'
 	git submodule update --init --recursive
-	@ $(ECHO) '\n===== [Submodule init] End =====\n'
 
 #: Update all submodule from remote
 git_update_submodule_from_remote:git_sync_submodule
-	@ $(ECHO) '\n===== [Submodule update] Start =====\n'
 	git submodule update --remote
-	@ $(ECHO) '\n===== [Submodule update] End =====\n'
 
 #: Update all submodule
 git_update_submodule:git_sync_submodule
-	@ $(ECHO) '\n===== [Submodule update] Start =====\n'
 	git submodule update --recursive
-	@ $(ECHO) '\n===== [Submodule update] End =====\n'
 
 ###
 ### git-crypt
@@ -88,58 +82,40 @@ check_passwd: root_passwd
 ### ArchLinux Package Manager
 ###
 pkgfile_update: check_passwd
-	@ $(ECHO) '\n===== [Pkgfile update] Start =====\n'
 	@ expect -c 'spawn sudo pkgfile -u; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n===== [Pkgfile update] End =====\n'
 
 pacman_update: check_passwd 
-	@ $(ECHO) '\n===== [Pacman system update] Start =====\n'
 	@ expect -c 'spawn sudo pacman -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n===== [Pacman system update] End =====\n'
 
 paru_update: check_passwd
-	@ $(ECHO) '\n===== [paru system update] Start =====\n'
 	@ expect -c 'spawn paru -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n===== [paru system update] End =====\n'
 
 pacdiff_notify:
-	@ $(ECHO) '\n===== [pacdiff] Start =====\n'
 	@ pacdiff -p -o
-	@ $(ECHO) '\n===== [pacdiff] End =====\n'
 
 ###
 ### miscellaneous
 ###
 
 zinit_update:
-	@ $(ECHO) '\n===== [Zinit update] Start =====\n'
 	zsh -ic 'zinit update'
-	@ $(ECHO) '\n===== [Zinit update] End =====\n'
 
 tldr_update:
 	tldr -u
 
 neovim_plugin_update:
-	@ $(ECHO) '\n===== [$@] Start =====\n'
 	nvim -i NONE -V1 --headless -c 'lua require("lazy").sync({wait=true,show=false})' +qa
 	nvim -i NONE -V1 --headless -c 'MasonUpdate' +qa
-	@ $(ECHO) '\n===== [$@] End =====\n'
 
 tmux_plugin_update:
-	@ $(ECHO) '\n===== [$@] Start =====\n'
 	$(TPM_PATH)/bin/update_plugins all
-	@ $(ECHO) '\n===== [$@] End =====\n'
 
 rime_sync:
-	@ $(ECHO) '\n===== [$@] Start =====\n'
 	./ScriptTools/Rime/sync_fcitx5.sh
-	@ $(ECHO) '\n===== [$@] End =====\n'
 
 #: update plocate database
 plocate_update: check_passwd
-	@ $(ECHO) '\n===== [$@] Start =====\n'
 	@ expect -c 'spawn sudo updatedb; expect "*password*"; send "$(ROOT_PASSWD)\r"; interact'
-	@ $(ECHO) '\n===== [$@] End =====\n'
 
 
 #: sync repo to init state
