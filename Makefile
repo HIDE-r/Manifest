@@ -1,5 +1,7 @@
 REPO ?= .repo/repo/repo
 ECHO ?= echo -e
+SUDO ?= sudo
+SUDO_N ?= $(SUDO) -n
 
 default: help
 
@@ -22,12 +24,15 @@ DOTBOT_CONFIG=install.conf.yaml
 
 TPM_PATH=~/.tpm
 
+sudo_validate:
+	$(SUDO) -v
+
 #: Configuration Install
 dotbot:
 	@$(CURDIR)/$(DOTBOT_DIR)/$(DOTBOT_BIN) -d $(CURDIR) -c $(DOTBOT_CONFIG)
 
 #: Daily update
-daily_update: check_passwd
+daily_update: sudo_validate
 	@./Manifest/scripts/daily_update.sh $(DAILY_UPDATE_ACTION)
 
 ###
@@ -60,39 +65,16 @@ git-crypt_unlock:
 	git-crypt unlock git-crypt.key
 
 ###
-### bitwarden
-###
-
-root_passwd:
-	$(eval export BW_SESSION:=$(shell bw unlock | sed -n '/BW_SESSION=/{p;q}' | cut -d '"' -f2))
-	@ echo $$(bw get password "ArchLinux-R9000K-root") | md5sum > root_passwd
-
-ifeq ($(DAILY_UPDATE_CHILD),1)
-check_passwd:
-else
-check_passwd: root_passwd
-	$(eval export INPUT_PASSWD:=$(shell read -s -p "Enter the root password:" input_passwd && echo $${input_passwd} ))
-	@ echo
-	@ input_hash=$$(echo ${INPUT_PASSWD} | md5sum | awk '{print $$1}'); \
-	file_hash=$$(cat root_passwd | awk '{print $$1}'); \
-	if [ "$$input_hash" != "$$file_hash" ]; then \
-		echo "Password does not match."; \
-		exit 1; \
-	fi
-	$(eval export ROOT_PASSWD:=$(INPUT_PASSWD))
-endif
-
-###
 ### ArchLinux Package Manager
 ###
-pkgfile_update: check_passwd
-	@ expect -c 'spawn sudo pkgfile -u; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
+pkgfile_update: sudo_validate
+	@$(SUDO_N) pkgfile -u
 
-pacman_update: check_passwd 
-	@ expect -c 'spawn sudo pacman -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
+pacman_update: sudo_validate
+	@$(SUDO_N) pacman -Syu --noconfirm
 
-paru_update: check_passwd
-	@ expect -c 'spawn paru -Syu --noconfirm; expect "password*"; send "$(ROOT_PASSWD)\r"; interact'
+paru_update: sudo_validate
+	@paru -Sua --noconfirm --sudoloop
 
 pacdiff_notify:
 	@ output=$$(pacdiff -p -o); \
@@ -122,8 +104,8 @@ rime_sync:
 	./ScriptTools/Rime/sync_fcitx5.sh
 
 #: update plocate database
-plocate_update: check_passwd
-	@ expect -c 'spawn sudo updatedb; expect "*password*"; send "$(ROOT_PASSWD)\r"; interact'
+plocate_update: sudo_validate
+	@$(SUDO_N) updatedb
 
 
 #: sync repo to init state
@@ -146,6 +128,6 @@ repo_push:
 	$(REPO) forall -i '.dotbot' -c 'status=$$(git status -sb); echo "===== $$REPO_PATH ====="; echo "$$status"; echo "$$status" | grep -q "ahead" && git push origin HEAD:main || true'
 
 help:
-	remake --tasks
+	@awk 'BEGIN {FS = ":.*"; desc = ""} /^#: / {desc = substr($$0, 4); next} /^[[:alnum:]_.-]+:/ {if (desc != "") {printf "  %-34s %s\n", $$1, desc; desc = ""}}' $(MAKEFILE_LIST)
 
-.PHONY: daily_update
+.PHONY: daily_update help
