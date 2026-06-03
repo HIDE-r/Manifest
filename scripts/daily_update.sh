@@ -51,6 +51,27 @@ ok_count=0
 fail_count=0
 warn_count=0
 skip_count=0
+saved_stty=""
+
+disable_tty_echo() {
+    [ -t 0 ] || return
+
+    if [ -z "${saved_stty}" ]; then
+        saved_stty="$(stty -g 2>/dev/null || true)"
+    fi
+    stty -echo 2>/dev/null || true
+}
+
+restore_tty_echo() {
+    [ -n "${saved_stty}" ] || return
+    [ -t 0 ] || return
+
+    stty "${saved_stty}" 2>/dev/null || true
+}
+
+trap restore_tty_echo EXIT
+trap 'restore_tty_echo; exit 130' INT
+trap 'restore_tty_echo; exit 143' TERM
 
 print_status() {
     local status="$1"
@@ -99,6 +120,7 @@ spinner_wait() {
         return $?
     fi
 
+    disable_tty_echo
     while kill -0 "${pid}" 2>/dev/null; do
         frame="${spinner:i%${#spinner}:1}"
         printf "\r%b%-*s%b  %s" "${blue}" "${status_width}" "${frame}" "${reset}" "${task}"
@@ -108,6 +130,7 @@ spinner_wait() {
 
     wait "${pid}"
     local rc=$?
+    restore_tty_echo
     printf "\r\033[K"
     return "${rc}"
 }
@@ -127,7 +150,7 @@ run_task() {
             | grep -v '^__DAILY_UPDATE_STATUS='
         rc=${PIPESTATUS[0]}
     else
-        MAKEFLAGS='' make --no-print-directory DAILY_UPDATE_CHILD=1 "${task}" >"${log_file}" 2>&1 &
+        MAKEFLAGS='' make --no-print-directory DAILY_UPDATE_CHILD=1 "${task}" >"${log_file}" 2>&1 </dev/null &
         spinner_wait "$!" "${task}"
         rc=$?
     fi
@@ -139,7 +162,7 @@ run_task() {
         marker="${marker%%:*}"
         case "${marker}" in
             warn)
-                print_status warn "${task}" "${message:-warning}"
+                print_status warn "${task}" "${message:-warning}; see ${log_file}"
                 warn_count=$((warn_count + 1))
                 return
                 ;;

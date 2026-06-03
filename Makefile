@@ -18,6 +18,8 @@ DAILY_UPDATE_ACTION+=tmux_plugin_update
 DAILY_UPDATE_ACTION+=plocate_update
 DAILY_UPDATE_ACTION+=neovim_plugin_update
 
+DAILY_CHECK_ACTION+=pacdiff_notify
+
 DOTBOT_DIR=.dotbot
 DOTBOT_BIN=bin/dotbot
 DOTBOT_CONFIG=install.conf.yaml
@@ -31,9 +33,17 @@ sudo_validate:
 dotbot:
 	@$(CURDIR)/$(DOTBOT_DIR)/$(DOTBOT_BIN) -d $(CURDIR) -c $(DOTBOT_CONFIG)
 
+
+#: Daily task
+daily: daily_update
+	@$(MAKE) --no-print-directory daily_check
+
 #: Daily update
 daily_update: sudo_validate
 	@./Manifest/scripts/daily_update.sh $(DAILY_UPDATE_ACTION)
+
+#: Daily check
+daily_check: sudo_validate $(DAILY_CHECK_ACTION)
 
 ###
 ### git submodule
@@ -76,11 +86,12 @@ pacman_update: sudo_validate
 paru_update: sudo_validate
 	@paru -Sua --noconfirm --sudoloop
 
+#: Notify pacdiff files that need review
 pacdiff_notify:
 	@ output=$$(pacdiff -p -o); \
 	if [ -n "$$output" ]; then \
+		printf 'pacdiff files need review:\n'; \
 		printf '%s\n' "$$output"; \
-		printf '__DAILY_UPDATE_STATUS=warn:pacdiff has files that need review\n'; \
 	fi
 
 ###
@@ -130,4 +141,4 @@ repo_push:
 help:
 	@awk 'BEGIN {FS = ":.*"; desc = ""} /^#: / {desc = substr($$0, 4); next} /^[[:alnum:]_.-]+:/ {if (desc != "") {printf "  %-34s %s\n", $$1, desc; desc = ""}}' $(MAKEFILE_LIST)
 
-.PHONY: daily_update help
+.PHONY: daily daily_update daily_check help
