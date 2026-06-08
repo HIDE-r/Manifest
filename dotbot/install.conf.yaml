@@ -78,6 +78,8 @@
       path: ./DotFiles/wlogout
     ~/.config/flameshot:
       path: ./DotFiles/flameshot
+    ~/.config/yazi-wsl:
+      path: ./DotFiles/yazi/yazi-wsl
 
 - clean:
     ~/:
