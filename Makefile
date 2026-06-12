@@ -17,6 +17,7 @@ DAILY_UPDATE_ACTION+=pkgfile_update
 DAILY_UPDATE_ACTION+=tmux_plugin_update
 DAILY_UPDATE_ACTION+=plocate_update
 DAILY_UPDATE_ACTION+=neovim_plugin_update
+DAILY_UPDATE_ACTION+=gpg_keyserver_refresh
 
 DAILY_CHECK_ACTION+=pacdiff_notify
 
@@ -93,6 +94,13 @@ pacdiff_notify:
 		printf 'pacdiff files need review:\n'; \
 		printf '%s\n' "$$output"; \
 	fi
+
+###
+### gpg
+###
+#: refresh gpg keys from keyserver
+gpg_keyserver_refresh:
+	gpg --refresh-keys
 
 ###
 ### miscellaneous
