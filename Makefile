@@ -18,6 +18,7 @@ DAILY_UPDATE_ACTION+=tmux_plugin_update
 DAILY_UPDATE_ACTION+=plocate_update
 DAILY_UPDATE_ACTION+=neovim_plugin_update
 DAILY_UPDATE_ACTION+=gpg_keyserver_refresh
+DAILY_UPDATE_ACTION+=dotbot
 
 DAILY_CHECK_ACTION+=pacdiff_notify
 
