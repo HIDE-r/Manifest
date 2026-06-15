@@ -129,22 +129,22 @@ plocate_update: sudo_validate
 
 #: sync repo to init state
 repo_init:
-	$(REPO) sync
-	$(REPO) forall -c 'git submodule update --init --recursive'
-	$(REPO) start local --all
+	@ $(REPO) sync
+	@ $(REPO) forall -c 'git submodule update --init --recursive'
+	@ $(REPO) start local --all
 
 #: sync repo from remote
 repo_sync:
-	$(REPO) sync
-	$(REPO) forall -c 'git submodule update --remote'
+	@ $(REPO) sync
+	@ $(REPO) forall -c 'git submodule update --remote'
 
 #: checkout repo status
 repo_status:
-	$(REPO) status
+	@ $(REPO) status
 
 #: push all commit to remote
 repo_push:
-	$(REPO) forall -i '.dotbot' -c '\
+	@ $(REPO) forall -i '.dotbot' -c '\
 		branch=$$(git branch --show-current); \
 		[ -n "$$branch" ] || exit 0; \
 		remote=$$(git config --get "branch.$$branch.remote"); \
