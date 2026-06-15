@@ -14,6 +14,10 @@
       path: ./ScriptTools/Rime/sync_fcitx5.sh
     ~/.local/bin/server_notify:
       path: ./ScriptTools/ServerNotify/server_notify
+    ~/.local/bin/ssh-add-keys.sh:
+      path: ./ScriptTools/SSH/ssh-add-keys.sh
+    ~/.config/systemd/user/ssh-add-keys.service:
+      path: ./ScriptTools/SSH/ssh-add-keys.service
     ~/.zshrc:
       path: ./DotFiles/zsh/zshrc
     ~/.prefix_list:
