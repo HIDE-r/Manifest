@@ -144,7 +144,18 @@ repo_status:
 
 #: push all commit to remote
 repo_push:
-	$(REPO) forall -i '.dotbot' -c 'status=$$(git status -sb); echo "===== $$REPO_PATH ====="; echo "$$status"; echo "$$status" | grep -q "ahead" && git push origin HEAD:main || true'
+	$(REPO) forall -i '.dotbot' -c '\
+		branch=$$(git branch --show-current); \
+		[ -n "$$branch" ] || exit 0; \
+		remote=$$(git config --get "branch.$$branch.remote"); \
+		merge=$$(git config --get "branch.$$branch.merge"); \
+		[ -n "$$remote" ] && [ -n "$$merge" ] || exit 0; \
+		ahead=$$(git rev-list --count @{u}..HEAD 2>/dev/null) || exit 0; \
+		if [ "$$ahead" -gt 0 ]; then \
+			printf "===== %s =====\\n" "$$REPO_PATH"; \
+			git status -sb; \
+			git push "$$remote" "HEAD:$$merge"; \
+		fi'
 
 help:
 	@awk 'BEGIN {FS = ":.*"; desc = ""} /^#: / {desc = substr($$0, 4); next} /^[[:alnum:]_.-]+:/ {if (desc != "") {printf "  %-34s %s\n", $$1, desc; desc = ""}}' $(MAKEFILE_LIST)
