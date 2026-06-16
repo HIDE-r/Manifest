@@ -135,7 +135,7 @@ repo_init:
 	@ $(REPO) start local --all
 
 #: sync repo from remote
-repo_sync:
+repo_sync: repo_push
 	@ $(REPO) sync
 	@ $(REPO) forall -c 'git submodule update --remote'
 
