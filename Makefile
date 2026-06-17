@@ -29,7 +29,7 @@ DOTBOT_CONFIG=install.conf.yaml
 TPM_PATH=~/.tpm
 
 sudo_validate:
-	$(SUDO) -v
+	@ $(SUDO) -v
 
 #: Configuration Install
 dotbot:
