@@ -141,7 +141,8 @@ repo_sync: repo_push
 
 #: checkout repo status
 repo_status:
-	@ $(REPO) status
+	@ $(REPO) status -j1
+	@ $(REPO) forall -j1 -c 'git submodule status --recursive 2>/dev/null | awk '\''/^[+-U]/ {print ENVIRON["REPO_PATH"] ": " $$0}'\'''
 
 #: push all commit to remote
 repo_push:
