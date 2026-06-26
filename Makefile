@@ -137,7 +137,7 @@ repo_init:
 #: sync repo from remote
 repo_sync: repo_push
 	@ $(REPO) sync
-	@ $(REPO) forall -c 'git submodule update --remote'
+	@ $(REPO) forall -i '.dotbot' -c 'git submodule update --remote'
 
 #: checkout repo status
 repo_status:
