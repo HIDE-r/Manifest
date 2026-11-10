@@ -84,6 +84,8 @@
       path: ./DotFiles/flameshot
     ~/.config/yazi-wsl:
       path: ./DotFiles/yazi/yazi-wsl
+    ~/.codex/AGENTS.md:
+      path: ./DotFiles/ai/AGENTS.md
 
 - clean:
     ~/:
